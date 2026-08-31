@@ -1,13 +1,13 @@
 # rust-on-m5stack-core2-examples
 M5Stack Core2で実行できるRustのExample集です。  
-[esp-idf-hal](https://github.com/esp-rs/esp-idf-hal/tree/master)を利用し、esp-idf-halのExampleや、書籍「基礎から学ぶ 組込みRust」（出版：株式会社C&R研究所　著者：中林 智之／井田 健太）でWio Terminal向けに実装しているプログラムをM5Stack Core2向けにカスタマイズしています。
+no_stdではなく、[esp-idf-hal](https://github.com/esp-rs/esp-idf-hal/tree/master)を利用しています。
 
-> 現在ExampleはLチカとLCDグラフィック表示のみですが、徐々に増やしていきます。
 
 **Contents:**
 - [各Exampleの概要](#各exampleの概要)
   - [led\_blink](#led_blink)
   - [lcd\_ili9342c](#lcd_ili9342c)
+  - [imu\_mpu6886](#imu_mpu6886)
 - [開発環境インストール手順](#開発環境インストール手順)
   - [Rustインストール](#rustインストール)
   - [ESPツールチェーンをインストール](#espツールチェーンをインストール)
@@ -29,17 +29,25 @@ cargo run --example led_blink
 
 ### led_blink
 M5Stack Core2のGPIO G27のHigh/Lowを切り替えてLチカします。
+esp-idf-halのExampleをベースにしています。
 
 ![](images/led_blink.gif)
 
 ### lcd_ili9342c
-M5Stack Core2に搭載されているLCD ili9342cに図形や画像を描画します。
+M5Stack Core2に搭載されているLCD ili9342cに図形や画像を描画します。  
+書籍「基礎から学ぶ 組込みRust」（出版：株式会社C&R研究所　著者：中林 智之／井田 健太）で紹介されているWio Terminal向けのサンプルプログラムをM5Stack Core2向けにカスタマイズしています。
 
 > Note:  
-> M5Stack Core2 v1.1ではLCDに電源供給する電源管理チップが異なるため動作しません。
+> M5Stack Core2では、電源管理チップAXP192からLCDに電源を供給する仕様のため、サンプルプログラムにはAXP192の制御も含まれていますが、M5Stack Core2 v1.1では電源管理チップが変更になっているため動作しません。
 
 ![](images/lcd_ili9342c.png)
 
+### imu_mpu6886
+M5Stack Core2に搭載されているIMU MPU6886から、I2Cで加速度と角速度を読み取り、シリアルモニタに出力します。  
+こちらの記事[「M5StackをRustで動かす」](https://zenn.dev/teruyamato0731/scraps/eaf1afddd92124)で紹介されているコードを、最新のesp-idf-halに合わせて一部修正しています。投稿者様の許可を得られたためコードを公開します。
+
+> Note:  
+> Core2 v1.3以降ではIMUのチップが変更になっているため動作しません。
 
 ## 開発環境インストール手順
 Ubuntu (WSL2)へのインストール手順を記載します。
@@ -103,7 +111,7 @@ $ cargo install cargo-generate
 
 作業フォルダで次のコマンドを実行する。
 ```
-cargo generate --vcs none --git https://github.com/esp-rs/esp-idf-template cargo
+$ cargo generate --vcs none --git https://github.com/esp-rs/esp-idf-template cargo
 ```
 対話形式でプロジェクト名、MCUなどを設定する。M5Stack Core2の場合、MCUはESP32。
 ![](images/cargo_generate.png)
@@ -165,5 +173,6 @@ $ sudo chmod 777 /dev/ttyACM0
 ```
 
 ## 参考資料
+- 「基礎から学ぶ 組込みRust」（出版：株式会社C&R研究所　著者：中林 智之／井田 健太）
 - [ESP32でstdなRust開発入門 -Lang-ship](https://lang-ship.com/blog/work/esp32-std-rust-1/)
 - [M5StackをRustで動かす](https://zenn.dev/teruyamato0731/scraps/eaf1afddd92124)
