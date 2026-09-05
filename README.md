@@ -6,6 +6,8 @@ no_stdではなく、[esp-idf-hal](https://github.com/esp-rs/esp-idf-hal/tree/ma
 **Contents:**
 - [各Exampleの概要](#各exampleの概要)
   - [led\_blink](#led_blink)
+  - [led\_pwm](#led_pwm)
+  - [pwm\_servo](#pwm_servo)
   - [lcd\_ili9342c](#lcd_ili9342c)
   - [imu\_mpu6886](#imu_mpu6886)
 - [開発環境インストール手順](#開発環境インストール手順)
@@ -32,6 +34,15 @@ M5Stack Core2のGPIO G27のHigh/Lowを切り替えてLチカします。
 esp-idf-halのExampleをベースにしています。
 
 ![](images/led_blink.gif)
+
+### led_pwm
+M5Stack Core2のGPIO G27からPWM制御でパルスを出力します。Dutyが0～100%で変化するので、上記led_blinkと同じようにLEDを接続するとLEDの明るさが変化します。コードはesp-idf-halのExampleのledc_simple.rsほぼそのままです。
+
+### pwm_servo
+上記led_pwmのPWM周期、パルス幅の範囲をサーボモーター向けに変更したものです。
+
+![](images/pwm_servo.gif)
+
 
 ### lcd_ili9342c
 M5Stack Core2に搭載されているLCD ili9342cに図形や画像を描画します。  
