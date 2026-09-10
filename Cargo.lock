@@ -531,6 +531,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "embedded-hal-bus"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "513e0b3a8fb7d3013a8ae17a834283f170deaf7d0eeab0a7c1a36ad4dd356d22"
+dependencies = [
+ "critical-section",
+ "embedded-hal 1.0.0",
+]
+
+[[package]]
+name = "embedded-hal-compat"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08ecac72f6be75ad2d4809c9f07d45502e2e5c9a4e9579077f28d7135de81df3"
+dependencies = [
+ "embedded-hal 0.2.7",
+ "embedded-hal 1.0.0",
+ "nb 1.1.0",
+]
+
+[[package]]
 name = "embedded-hal-nb"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -581,7 +602,7 @@ dependencies = [
  "embedded-io-async 0.7.0",
  "enumset",
  "heapless 0.9.3",
- "num_enum",
+ "num_enum 0.7.6",
  "serde",
  "strum 0.27.2",
 ]
@@ -698,7 +719,7 @@ dependencies = [
  "futures-io",
  "heapless 0.9.3",
  "log",
- "num_enum",
+ "num_enum 0.7.6",
  "uncased",
 ]
 
@@ -771,6 +792,16 @@ dependencies = [
  "libc",
  "nix",
  "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "ft6x36"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "80f9dfa108c27d6d95bd82f3b652f888a858f7875fb2b3b765887affa96130c7"
+dependencies = [
+ "embedded-hal 0.2.7",
+ "num_enum 0.5.11",
 ]
 
 [[package]]
@@ -1084,10 +1115,13 @@ dependencies = [
  "embassy-time",
  "embedded-graphics",
  "embedded-hal 1.0.0",
+ "embedded-hal-bus",
+ "embedded-hal-compat",
  "embuild",
  "esp-idf-hal",
  "esp-idf-svc",
  "esp-idf-sys",
+ "ft6x36",
  "log",
  "mipidsi",
 ]
@@ -1180,12 +1214,32 @@ dependencies = [
 
 [[package]]
 name = "num_enum"
+version = "0.5.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1f646caf906c20226733ed5b1374287eb97e3c2a5c227ce668c1f2ce20ae57c9"
+dependencies = [
+ "num_enum_derive 0.5.11",
+]
+
+[[package]]
+name = "num_enum"
 version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5d0bca838442ec211fa11de3a8b0e0e8f3a4522575b5c4c06ed722e005036f26"
 dependencies = [
- "num_enum_derive",
+ "num_enum_derive 0.7.6",
  "rustversion",
+]
+
+[[package]]
+name = "num_enum_derive"
+version = "0.5.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dcbff9bc912032c62bf65ef1d5aea88983b420f4f839db1e9b0c281a25c9c799"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
 ]
 
 [[package]]

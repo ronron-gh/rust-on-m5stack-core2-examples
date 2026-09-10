@@ -9,6 +9,7 @@ no_stdではなく、[esp-idf-hal](https://github.com/esp-rs/esp-idf-hal/tree/ma
   - [led\_pwm](#led_pwm)
   - [pwm\_servo](#pwm_servo)
   - [lcd\_ili9342c](#lcd_ili9342c)
+  - [touch\_ft6x36u](#touch_ft6x36u)
   - [imu\_mpu6886](#imu_mpu6886)
 - [開発環境インストール手順](#開発環境インストール手順)
   - [Rustインストール](#rustインストール)
@@ -39,7 +40,7 @@ esp-idf-halのExampleをベースにしています。
 M5Stack Core2のGPIO G27からPWM制御でパルスを出力します。Dutyが0～100%で変化するので、上記led_blinkと同じようにLEDを接続するとLEDの明るさが変化します。コードはesp-idf-halのExampleのledc_simple.rsほぼそのままです。
 
 ### pwm_servo
-上記led_pwmのPWM周期、パルス幅の範囲をサーボモーター向けに変更したものです。
+上記led_pwmのPWM制御の周期、パルス幅の範囲をサーボモーター向けに変更したものです。
 
 ![](images/pwm_servo.gif)
 
@@ -49,9 +50,16 @@ M5Stack Core2に搭載されているLCD ili9342cに図形や画像を描画し�
 書籍「基礎から学ぶ 組込みRust」（出版：株式会社C&R研究所　著者：中林 智之／井田 健太）で紹介されているWio Terminal向けのサンプルプログラムをM5Stack Core2向けにカスタマイズしています。
 
 > Note:  
-> M5Stack Core2では、電源管理チップAXP192からLCDに電源を供給する仕様のため、サンプルプログラムにはAXP192の制御も含まれていますが、M5Stack Core2 v1.1では電源管理チップが変更になっているため動作しません。
+> M5Stack Core2では、電源管理チップAXP192からLCDに電源を供給する仕様のため、サンプルプログラムにはAXP192の制御も含まれています。M5Stack Core2 v1.1では電源管理チップが変更になっているため動作しません。
 
 ![](images/lcd_ili9342c.png)
+
+### touch_ft6x36u
+M5Stack Core2の画面タッチを検出し、座標と判定した操作（1点のタッチ or スワイプ）をシリアルモニタにログ出力します。
+
+> Note:  
+> ・M5Stack Core2はボタンA/B/Cのタッチも画面タッチとして検出します。このサンプルプログラムでもボタンA/B/Cをタッチすると座標が表示されます。  
+> ・M5Stack Core2では、電源管理チップAXP192でFT6336Uをリセットする仕様のため、サンプルプログラムにはAXP192の制御も含まれています。M5Stack Core2 v1.1では電源管理チップが変更になっているため動作しません。
 
 ### imu_mpu6886
 M5Stack Core2に搭載されているIMU MPU6886から、I2Cで加速度と角速度を読み取り、シリアルモニタに出力します。  
